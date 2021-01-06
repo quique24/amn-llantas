@@ -188,6 +188,10 @@ export class AppComponent {
         {
           clasificacion = "camioneta";         
         }
+        else if(medida != undefined && (medida == "10.00 -16" || medida == "11.00 -22" || medida == "12.40 -24" || medida == "15.50 -38" || medida == "16.00 -24" || medida == "16.90 -30" || medida == "18.00 -25" || medida == "18.40 -38" || medida == "26.50 -25" || medida == "29.50 -29"))
+        {
+          clasificacion = "camion";
+        }
 
         if(medida != undefined && medida.indexOf("R") !== -1)
         {
@@ -196,6 +200,8 @@ export class AppComponent {
             clasificacion = "camion";
             if(Number(rin) == 14)
             clasificacion = "auto";
+            if(Number(rin) == 15 || Number(rin) == 17 || Number(rin) == 18 || Number(rin) == 20 || Number(rin) == 22)
+            clasificacion = "camioneta";
         }
 
         if (clasificacion == 'camion') {
