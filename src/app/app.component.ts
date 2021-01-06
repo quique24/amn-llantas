@@ -184,11 +184,18 @@ export class AppComponent {
           else if(Number(ancho) >= 235 && Number(ancho) <= 345)
           clasificacion = "camioneta";         
         }
+        else if(medida != undefined && (medida == "7.50 -16" || medida == "7.50 -17"))
+        {
+          clasificacion = "camioneta";         
+        }
+
         if(medida != undefined && medida.indexOf("R") !== -1)
         {
           rin = medida.substring(medida.indexOf("R"), medida.length).replace("R","");                    
           if(Number(rin) == 17.5 || Number(rin) == 19.5 || Number(rin) == 22.5 || Number(rin) == 24.5)
             clasificacion = "camion";
+            if(Number(rin) == 14)
+            clasificacion = "auto";
         }
 
         if (clasificacion == 'camion') {
