@@ -1,0 +1,124 @@
+<div fxLayout="column">
+
+  <div fxLayout=”row” fxFlex="100">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <img width="40" alt="Angular Logo" src="assets/img/logo-03.png" />
+        <span>AMN Store Manager</span>
+        <span class="example-spacer"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+  <div fxLayout=”row” fxFlex="100" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" class="buttons-row" (click)="getLlantas()">
+      <mat-icon>cloud_download</mat-icon>
+      Descargar inventario
+    </button>
+    
+    <Ngx-CSVtoJSON (onConvert)="convert($event)" (onFail)="onError($event)"></Ngx-CSVtoJSON>
+    <!-- <button mat-raised-button color="primary" class="buttons-row" [disabled]="!dataSource">
+      <mat-icon>publish</mat-icon>
+      Publicar inventario
+    </button> -->
+    <button mat-raised-button color="primary" class="buttons-row" (click)="createCSV()" [disabled]="!dataSource">
+      <mat-icon>text_snippet</mat-icon>
+      Crear archivo CSV
+    </button>
+
+    
+
+    <!--  <button mat-raised-button color="primary" class="buttons-row" (click)="getPrueba()">
+      <mat-icon>publish</mat-icon>
+      GET PRUEBA
+    </button> -->
+  </div>
+
+  <div fxLayout=”row” fxFlex="100">
+    <div fxLayout="column" fxFlex="100">
+
+      <mat-form-field class="filter-table">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input [disabled]="!dataSource">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 card-table" *ngIf="dataSource">
+
+        <ng-container matColumnDef="clasificacion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Clasificacion </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.clasificacion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="marca">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Marca}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="modelo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Modelo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="origen">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Origen </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Origen}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Rin </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Rin}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Tipo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subtipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Subtipo </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Subtipo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="existencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Existencia </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.Existencia}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.precio | currency}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="utilidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio + Utilidad </th>
+          <td mat-cell *matCellDef="let llanta"> {{llanta.utilidad | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <div class="p-4 ml-4" fxFlex="none" fxFlexAlign="center" *ngIf="!dataSource">
+        <img src="assets/img/logo-02.png" style="width: 500px; margin-top: 100px;">
+        <h2 style="text-align: center;">Bienvenido.</h2>
+        <h3 style="text-align: center;">Descarga el inventario actualizado para crear archivo CSV.</h3>
+      </div>
+
+      <div>
+        {{llantas}}
+      </div>
+
+      <div class="loading-shade" *ngIf="loading">
+        <div class="loaders-container">
+          <div class="container">
+            <div class="switchbox">
+              <div class="switch"></div>
+              <div class="switch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
