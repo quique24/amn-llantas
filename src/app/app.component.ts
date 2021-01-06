@@ -184,7 +184,7 @@ export class AppComponent {
           else if(Number(ancho) >= 235 && Number(ancho) <= 345)
           clasificacion = "camioneta";         
         }
-        else if(medida != undefined && (medida == "7.50 -16" || medida == "7.50 -17"))
+        else if(medida != undefined && (medida == "7.50 -16" || medida == "7.50 -17" || medida == "6.50 -16" || medida == "7.00 -14" || medida == "7.00 -15"))
         {
           clasificacion = "camioneta";         
         }
